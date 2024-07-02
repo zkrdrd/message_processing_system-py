@@ -1,8 +1,5 @@
 from datetime import datetime
 
-TYPE_MESSAGE_CREATED = "created"
-TYPE_MESSAGE_PROCESSED = "processed"
-TYPE_MESSAGE_CANCELED = "canceled"
 
 class Payment:
 
@@ -12,12 +9,8 @@ class Payment:
     # AddresTo:str
     # Amount:int
 
-    def SetMessagePaymentToPayment(self,
-                 TypeMessage,
-                 UidMessage,
-                 AddresFrom,
-                 AddresTo,
-                 Amount) -> None:    
+    def SetMessagePaymentToPayment(self, TypeMessage, UidMessage,
+                                   AddresFrom, AddresTo, Amount) -> None:    
         self.TypeMessage = TypeMessage
         self.UidMessage = UidMessage
         self.AddresFrom = AddresFrom
