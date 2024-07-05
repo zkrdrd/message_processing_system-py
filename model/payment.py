@@ -9,8 +9,8 @@ class Payment:
     # AddresTo:str
     # Amount:int
 
-    def set_message_payment_to_payment(self, type_message, uid_message,
-                                   addres_from, addres_to, amount) -> None:    
+    def set_message_to_payment(self, type_message, uid_message,
+                               addres_from, addres_to, amount) -> None:    
         self.type_message = type_message
         self.uid_message = uid_message
         self.addres_from = addres_from
@@ -22,5 +22,8 @@ class Payment:
     def set_date_time(self) -> None:
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
+    def get_uid_message(self):
+        return self.uid_message
+
     def get_message_payment(self) -> str:
-        return self.type_message, self.uid_message, self.addres_from, self.addres_to, self.amount
+        return self.type_message, self.uid_message, self.addres_from, self.addres_to, self.amount, self.created_at, self.updated_at

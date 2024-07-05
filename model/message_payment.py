@@ -13,7 +13,7 @@ class MessagePayment(Payment, ValidationError):
             print(err)
             exit()
 
-        Payment.set_message_payment_to_payment(self, type_message, uid_message,
+        Payment.set_message_to_payment(self, type_message, uid_message,
                                            addres_from, addres_to, amount)
 
     

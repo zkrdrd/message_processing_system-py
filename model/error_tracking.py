@@ -7,13 +7,13 @@ class ValidationError(Exception):
     def validate_required_fields(self, type_message, uid_message) -> str:
         
         if not type_message:
-            raise ValidationError('field "TypeMessage" is empty')
+            raise ValidationError('ValidationError: field "TypeMessage" is empty')
 
         if not uid_message:
-            raise ValidationError('field "UidMessage" is empty')
+            raise ValidationError('ValidationError: field "UidMessage" is empty')
 
         if (type_message != TMP.TYPE_MESSAGE_CREATED.value and
             type_message != TMP.TYPE_MESSAGE_PROCESSED.value and
             type_message != TMP.TYPE_MESSAGE_CANCELED.value):
-            raise ValidationError('field "TypeMessage" is not correct')
+            raise ValidationError('ValidationError: field "TypeMessage" is not correct')
         
