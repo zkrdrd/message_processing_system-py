@@ -3,11 +3,12 @@ from datetime import datetime
 
 class Payment:
 
-    # TypeMessage:str
-    # UidMessage:str
-    # AddresFrom:str
-    # AddresTo:str
-    # Amount:int
+    # def __init__(self) -> None:
+        # self.TypeMessage:str
+        # self.UidMessage:str
+        # self.AddresFrom:str
+        # self.AddresTo:str
+        # self.Amount:int
 
     def set_message_to_payment(self, type_message, uid_message,
                                addres_from, addres_to, amount) -> None:    
@@ -19,10 +20,10 @@ class Payment:
         self.created_at = self.set_date_time()
         self.updated_at = self.set_date_time()
 
-    def set_date_time(self) -> None:
+    def set_date_time(self) -> str:
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
-    def get_uid_message(self):
+    def get_uid_message(self) -> str:
         return self.uid_message
 
     def get_message_payment(self) -> str:

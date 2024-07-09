@@ -1,14 +1,13 @@
 from model import message_payment as mP
 from model.error_tracking import ValidationError
-from storage.memory.db import MemoryDataBase as MDB
+import storage.memory.db as db 
 
 def processing(TM, UM, AF, AT, A) -> str:
     mP.MessagePayment(TM, UM, AF, AT, A)
 
-    obj = MDB()
-    obj.init_memory_base()
-    obj.insert_to_memory()
-    obj.get_payment_dy_id(UM)
+    db.init_memory_base()
+    db.insert_to_memory()
+    db.get_payment_dy_id(UM)
 
    # return s
 
