@@ -1,27 +1,25 @@
 from datetime import datetime
-
+from model.constants import Constants
 
 class Payment:
 
-    # def __init__(self) -> None:
-        # self.TypeMessage:str
-        # self.UidMessage:str
-        # self.AddresFrom:str
-        # self.AddresTo:str
-        # self.Amount:int
+    TypeMessage:str
+    UidMessage:str
+    AddresFrom:str
+    AddresTo:str
+    Amount:int
+    created_at:str
+    updated_at:str
 
-    def set_message_to_payment(self, type_message, uid_message,
-                               addres_from, addres_to, amount) -> None:    
+    def __init__(self, type_message, uid_message, 
+                 addres_from, addres_to, amount) -> None:    
         self.type_message = type_message
         self.uid_message = uid_message
         self.addres_from = addres_from
         self.addres_to = addres_to
         self.amount = amount
-        self.created_at = self.set_date_time()
-        self.updated_at = self.set_date_time()
-
-    def set_date_time(self) -> str:
-        return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.created_at = datetime.now().strftime(Constants.DATE_TIME.value)
+        self.updated_at = datetime.now().strftime(Constants.DATE_TIME.value)
     
     def get_uid_message(self) -> str:
         return self.uid_message

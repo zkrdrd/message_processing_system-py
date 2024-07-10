@@ -1,15 +1,23 @@
-from processor import message_processing as mp
-from model import payment as payment
-from model.type_message_variables import TypeMessageVariables as TMV
+from processor.message_processing import Processing
+from model.payment import Payment
+from model.type_message_variables import TypeMessageVariables
+from model.message_payment import MessagePayment
+from model.error_tracking import ValidationError
 
-PaymentMessages = {
-    "TypeMessage": TMV.TYPE_MESSAGE_CREATED.value,
-    "UidMessage": "1A",
-    "AddresFrom": "123",
-    "AddresTo": "321",
-    "Amount": 50
-    }
 
-s = mp.processing(TMV.TYPE_MESSAGE_CREATED.value, "1A", "123", "321", 50)
+PaymentMessages = [
+    MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "1A", "123", "321", 50),
+    MessagePayment(TypeMessageVariables.TYPE_MESSAGE_PROCESSED.value, "1A", "", "", ""),
+    MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CANCELED.value, "1A", "", "", ""),
+    MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "2A", "", "", ""),
+    MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "2A", "", "", "")
+]
 
-print(s)
+for msg in PaymentMessages:
+    try:
+        ValidationError().validate_required_fields(msg.type_message, msg.uid_message)
+    except ValidationError as err:
+        print(err)
+    else:
+        Processing.processing()
+    
