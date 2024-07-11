@@ -16,8 +16,8 @@ class MessagePayment():
         self.addres_to = addres_to
         self.amount = amount
     
-    def ToPayment(self) -> Payment:
-        return Payment(self.type_message, self.uid_message, self.addres_from, self.addres_to, self.amount, '', '')
+    def to_payment(self) -> Payment:
+        return Payment(self.type_message, self.uid_message, self.addres_from, self.addres_to, self.amount)
 
 
     
