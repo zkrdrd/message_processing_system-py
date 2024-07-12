@@ -1,17 +1,19 @@
 from model.payment import Payment
 
 class StorageInMemory:
-    def init_memory_base():
-        memory_database = []
-        return memory_database
+
+    def __init__(self):
+        self.memory_database = {}
+        #return self.memory_database
 
     def save_payment(self, payment:Payment):
-        obj = Payment
-        print(obj.get_uid_message())
-        #self.memory_database[super().uid_message] = obj.get_message_payment()
+        s = payment.get_uid_message
+        print(s)
+        #self.memory_database[payment.uid_message] = payment.get_message_payment()
 
-    def get_payment_dy_id(memory_database, id:str) -> object:
-        if id in memory_database:
+    def get_payment_dy_id(self, id:str):
+        if id in self.memory_database:
+            print("yes")
             obj = Payment
             get = obj.get_message_payment()
             print(get)

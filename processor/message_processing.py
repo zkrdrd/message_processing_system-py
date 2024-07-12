@@ -5,11 +5,17 @@ from model.message_payment import MessagePayment
 from storage.memory.db import StorageInMemory
 
 class Processing:
-    def processing(msg) -> str:
+    def processing(msg:MessagePayment) -> str:
 
-        if err := StorageInMemory().get_payment_dy_id():
+        obj = StorageInMemory()
+        #StorageInMemory().init_memory_base()
+        if err := obj.get_payment_dy_id(msg.uid_message):
             print(err)
-        #MessagePayment().to_payment()
+
+        msg.to_payment()
+
+        if err := obj.save_payment(Payment):
+            print(err)
 
         #mP.MessagePayment()
         #db.init_memory_base()

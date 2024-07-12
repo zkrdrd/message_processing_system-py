@@ -21,7 +21,7 @@ class Payment:
         self.created_at = datetime.now().strftime(Constants.DATE_TIME.value)
         self.updated_at = datetime.now().strftime(Constants.DATE_TIME.value)
     
-    def get_uid_message(self) -> str:
+    def get_uid_message(self):
         return self.uid_message
 
     def get_message_payment(self) -> str:
