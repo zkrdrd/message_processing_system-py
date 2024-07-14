@@ -7,8 +7,8 @@ class StorageInMemory:
         #return self.memory_database
 
     def save_payment(self, payment:Payment):
-        s = payment.get_uid_message
-        print(s)
+        print(payment.get_uid_message)
+        #print(s)
         #self.memory_database[payment.uid_message] = payment.get_message_payment()
 
     def get_payment_dy_id(self, id:str):

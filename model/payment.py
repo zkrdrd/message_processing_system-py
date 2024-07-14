@@ -3,11 +3,11 @@ from model.constants import Constants
 
 class Payment:
 
-    TypeMessage:str
-    UidMessage:str
-    AddresFrom:str
-    AddresTo:str
-    Amount:int
+    type_message:str
+    uid_message:str
+    addres_from:str
+    addres_to:str
+    amount:int
     created_at:str
     updated_at:str
 

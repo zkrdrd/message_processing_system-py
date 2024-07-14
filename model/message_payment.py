@@ -2,11 +2,11 @@ from model.payment import Payment
 
 class MessagePayment():
 
-    TypeMessage:str
-    UidMessage:str
-    AddresFrom:str
-    AddresTo:str
-    Amount:int
+    type_message:str
+    uid_message:str
+    addres_from:str
+    addres_to:str
+    amount:int
     
     def __init__(self, type_message, uid_message,
                  addres_from, addres_to, amount) -> None:

@@ -7,14 +7,14 @@ from storage.memory.db import StorageInMemory
 class Processing:
     def processing(msg:MessagePayment) -> str:
 
-        obj = StorageInMemory()
-        #StorageInMemory().init_memory_base()
-        if err := obj.get_payment_dy_id(msg.uid_message):
+        obj_storage_memory = StorageInMemory()
+        
+        if err := obj_storage_memory.get_payment_dy_id(msg.uid_message):
             print(err)
+ 
+        msg.to_payment
 
-        msg.to_payment()
-
-        if err := obj.save_payment(Payment):
+        if err := obj_storage_memory.save_payment(Payment):
             print(err)
 
         #mP.MessagePayment()
