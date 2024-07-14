@@ -11,12 +11,12 @@ class Processing:
         
         if err := obj_storage_memory.get_payment_dy_id(msg.uid_message):
             print(err)
- 
-        msg.to_payment
 
-        if err := obj_storage_memory.save_payment(Payment):
+        if err := obj_storage_memory.save_payment(msg.to_payment()):
             print(err)
 
+        if err := obj_storage_memory.get_payment_dy_id(msg.uid_message):
+            print(err)
         #mP.MessagePayment()
         #db.init_memory_base()
         #db.insert_to_memory()
