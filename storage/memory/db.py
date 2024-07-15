@@ -8,6 +8,8 @@ class StorageInMemory:
     def save_payment(self, payment:Payment):
         self.memory_database[payment.uid_message] = payment.get_message_payment()
 
+#TODO: 
+# 1. Eсли запись есть поменять статус 
     def get_payment_dy_id(self, id:str):
         if id in self.memory_database:
             print("yes")
