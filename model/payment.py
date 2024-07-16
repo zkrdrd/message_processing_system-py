@@ -26,3 +26,7 @@ class Payment:
 
     def get_message_payment(self) -> str:
         return self.type_message, self.uid_message, self.addres_from, self.addres_to, self.amount, self.created_at, self.updated_at
+    
+    def set_payment(self, created_at, updated_at):
+        self.created_at = created_at
+        self.updated_at = updated_at
