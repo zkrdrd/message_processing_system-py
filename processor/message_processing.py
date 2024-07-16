@@ -27,13 +27,15 @@ class Processing:
                 print(err)
             else: 
                 payment.type_message = msg.type_message
+                payment.updated_at = payment.set_datetime()
                 if err := obj_storage_memory.save_payment(payment):
                     print(err)
 
 
 
         payment = obj_storage_memory.get_payment_dy_id(msg.uid_message)
-        if payment.uid_message != None:
-            print("ok")
+        if payment != None:
+            if payment.uid_message != None:
+                print("ok")
 
 

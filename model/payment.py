@@ -18,8 +18,11 @@ class Payment:
         self.addres_from = addres_from
         self.addres_to = addres_to
         self.amount = amount
-        self.created_at = datetime.now().strftime(Constants.DATE_TIME.value)
-        self.updated_at = datetime.now().strftime(Constants.DATE_TIME.value)
+        self.created_at = self.set_datetime()
+        self.updated_at = self.set_datetime()
+
+    def set_datetime(self):
+        return datetime.now().strftime(Constants.DATE_TIME.value)
     
     def get_uid_message(self):
         return self.uid_message
