@@ -1,5 +1,4 @@
-
-from model.type_message_variables import TypeMessageVariables as TMP
+from parameters.type_message_variables import TypeMessageVariables as TMP
 
 class ValidationError(Exception):
 
@@ -26,6 +25,6 @@ class ValidationError(Exception):
             raise ValidationError('ValidationError: field "Amount" is less or equal zero')
         
     def validate_field_type_message_for_update_db(self, type_message):
-        print(type_message)
         if type_message != TMP.TYPE_MESSAGE_CREATED.value:
             raise ValidationError('ValidationError: field "TypeMessage" is not correct')
+        

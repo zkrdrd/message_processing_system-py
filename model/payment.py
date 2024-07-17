@@ -1,5 +1,5 @@
 from datetime import datetime
-from model.constants import Constants
+from parameters.constants import Constants
 
 class Payment:
 

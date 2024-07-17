@@ -1,17 +1,11 @@
 from processor.message_processing import Processing
-from model.payment import Payment
-from model.type_message_variables import TypeMessageVariables
+from parameters.type_message_variables import TypeMessageVariables
 from model.message_payment import MessagePayment
-from model.error_tracking import ValidationError
-import logging
+from error_tracking.validation_error import ValidationError
+from parameters.enviroment import Environment
+from log.logger import logger
 
-file_log = logging.FileHandler('logging.log')
-console_out = logging.StreamHandler()
-
-logging.basicConfig(handlers=(file_log, console_out), 
-                    format='[%(asctime)s | %(levelname)s]: %(message)s', 
-                    datefmt='%m.%d.%Y %H:%M:%S',
-                    level=logging.INFO)
+#log = logging.getLogger()
 
 PaymentMessages = [
     MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "1A", "123", "321", 50),
@@ -21,13 +15,17 @@ PaymentMessages = [
     MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "2A", "", "", "")
 ]
 
+storage_type, storage_file_path = Environment.get_env_storage()
+storage = Environment.use_storage(storage_type, storage_file_path)
+
+
 for msg in PaymentMessages:
-    #msg.type_message = ""
+    msg.type_message = ""
     try:
         ValidationError().validate_required_fields(msg.type_message, msg.uid_message)
     except ValidationError as err:
-        logging.info(err)
+        logger.error(err)
     else:
         msg.to_payment()
-        Processing.processing(msg)
+        Processing.processing(msg, storage)
     
