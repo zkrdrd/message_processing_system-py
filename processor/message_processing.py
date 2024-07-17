@@ -9,7 +9,7 @@ class Processing:
     # 1. исправить инийиализацию новой базы in memory при каждой итерации
         #obj_storage_memory = StorageInMemory()
         
-        payment = storage.get_payment_dy_id(msg.uid_message)
+        payment = storage.get_payment_dy_id(msg.uid_message)        
         if payment.uid_message == None:
             try:
                 ValidationError().validate_requred_field_for_new_save_db(msg.addres_to, msg.addres_from, msg.amount)
@@ -35,5 +35,3 @@ class Processing:
         if payment != None:
             if payment.uid_message != None:
                 print("ok")
-
-

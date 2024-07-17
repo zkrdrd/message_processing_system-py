@@ -20,7 +20,7 @@ storage = Environment.use_storage(storage_type, storage_file_path)
 
 
 for msg in PaymentMessages:
-    msg.type_message = ""
+    #msg.type_message = ""
     try:
         ValidationError().validate_required_fields(msg.type_message, msg.uid_message)
     except ValidationError as err:
