@@ -4,6 +4,7 @@ from model.message_payment import MessagePayment
 from error_tracking.validation_error import ValidationError
 from parameters.enviroment import Environment
 from log.logger import logger
+from time import sleep
 
 #log = logging.getLogger()
 
@@ -26,6 +27,7 @@ for msg in PaymentMessages:
     except ValidationError as err:
         logger.error(err)
     else:
+        sleep(5)
         msg.to_payment()
         Processing.processing(msg, storage)
     

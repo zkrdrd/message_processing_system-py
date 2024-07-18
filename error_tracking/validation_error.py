@@ -26,5 +26,8 @@ class ValidationError(Exception):
         
     def validate_field_type_message_for_update_db(self, type_message):
         if type_message != TMP.TYPE_MESSAGE_CREATED.value:
-            raise ValidationError('ValidationError: field "TypeMessage" is not correct')
+            raise ValidationError(f'ValidationError: payment with this UID is exist in storage')
         
+    def check_dublicate_payment_in_storage(self, payment_type_message, message_payment_type_message):
+        if payment_type_message == message_payment_type_message:
+            raise ValidationError(f'ValidationError: payment is dublicate')

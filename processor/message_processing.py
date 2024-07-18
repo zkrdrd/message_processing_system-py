@@ -4,13 +4,14 @@ from error_tracking.validation_error import ValidationError
 
 class Processing:
 
+    @staticmethod
     def processing(msg:MessagePayment, storage) -> str:
     #TODO:
     # 1. исправить инийиализацию новой базы in memory при каждой итерации
         #obj_storage_memory = StorageInMemory()
         
-        payment = storage.get_payment_dy_id(msg.uid_message)        
-        if payment.uid_message == None:
+        payment = storage.get_payment_dy_id(msg.uid_message)    
+        if payment == None:
             try:
                 ValidationError().validate_requred_field_for_new_save_db(msg.addres_to, msg.addres_from, msg.amount)
             except ValidationError as err:
@@ -21,11 +22,12 @@ class Processing:
         else:
             try:
                 ValidationError().validate_field_type_message_for_update_db(payment.type_message)
+                ValidationError().check_dublicate_payment_in_storage(payment.type_message, msg.type_message)
             except ValidationError as err:
                 logger.error(err)
             else: 
                 payment.type_message = msg.type_message
-                payment.updated_at = payment.set_datetime()
+                payment.update_updated_at()
                 if err := storage.save_payment(payment):
                     logger.error(err)
 
