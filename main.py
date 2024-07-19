@@ -1,12 +1,12 @@
 from processor.message_processing import Processing
-from parameters.type_message_variables import TypeMessageVariables
-from model.message_payment import MessagePayment
+from params.type_message_variables import TypeMessageVariables
+from models.message_payment import MessagePayment
 from error_tracking.validation_error import ValidationError
-from parameters.enviroment import Environment
-from log.logger import logger
+from params.get_enviroment import Environment
+from params.log.logger import logger
 from time import sleep
 
-#log = logging.getLogger()
+# https://sky.pro/media/struktura-proekta-na-python-luchshie-praktiki-dlya-novichkov/
 
 PaymentMessages = [
     MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "1A", "123", "321", 50),
@@ -16,8 +16,8 @@ PaymentMessages = [
     MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "2A", "", "", "")
 ]
 
-storage_type, storage_file_path = Environment.get_env_storage()
-storage = Environment.use_storage(storage_type, storage_file_path)
+storage_type, storage_file_path = Environment().get_env_storage()
+storage = Environment().use_storage(storage_type, storage_file_path)
 
 
 for msg in PaymentMessages:
