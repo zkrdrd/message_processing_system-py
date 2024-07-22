@@ -1,14 +1,15 @@
 import sqlite3
 from types import SimpleNamespace
+from log.logger import logger
 from models.payment import Payment
-from params.log.logger import logger
+
 
 class StorageInSQLite:
 
     def __init__(self, storage_file_path:str) -> None:
         """Инициализация хранилища"""
 
-        self.__tables = ['''CREATE TABLE IF NOT EXISTS payment 
+        self.__create_base = ['''CREATE TABLE IF NOT EXISTS payment 
 		(id INTEGER PRIMARY KEY AUTOINCREMENT, 
 		type_message TEXT NOT NULL, 
 		uid_message TEXT NOT NULL UNIQUE, 
@@ -23,11 +24,12 @@ class StorageInSQLite:
         try:
             with sqlite3.connect(self.__sqlite_storage) as self.__connect:
                 self.__cursor = self.__connect.cursor()
-                for var in self.__tables:
+                for var in self.__create_base:
                     self.__cursor.execute(var)
                 self.__connect.commit()
         except sqlite3.Error as err:
-            logger.error(err)
+            logger.critical(err)
+            return err
 
     def save_payment(self, payment:Payment) -> None:
         """Сохранение данных в хранилище"""
@@ -54,7 +56,8 @@ class StorageInSQLite:
                 self.__connect.cursor().execute(self.__query_insert_update, self.__save_payment_fields)
                 self.__connect.commit()
         except sqlite3.Error as err:
-            logger.error(err)
+            logger.critical(err)
+            return err
 
     def get_payment_by_id(self, id:str) -> Payment:
         """Получение данных из хранилища по id"""
@@ -78,4 +81,5 @@ class StorageInSQLite:
                 #self.__getted_payment = connect.cursor().execute(self.__query_select, (id,)).fetchone()
                 #self.__getted_payment_dict:dict = dict(eval(self.__getted_payment))
         except sqlite3.Error as err:
-            logger.error(err)
+            logger.critical(err)
+            return err

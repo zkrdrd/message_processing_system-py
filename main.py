@@ -1,10 +1,12 @@
+import sqlite3
+from time import sleep
+from log.logger import logger
+from models.message_payment import MessagePayment
+from get_env.get_enviroment import Environment
+from error_tracking.env_error import EnvError
 from processor.message_processing import Processing
 from params.type_message_variables import TypeMessageVariables
-from models.message_payment import MessagePayment
 from error_tracking.validation_error import ValidationError
-from params.get_enviroment import Environment
-from params.log.logger import logger
-from time import sleep
 
 # https://sky.pro/media/struktura-proekta-na-python-luchshie-praktiki-dlya-novichkov/
 
@@ -18,6 +20,8 @@ PaymentMessages = [
 
 storage_type, storage_file_path = Environment().get_env_storage()
 storage = Environment().use_storage(storage_type, storage_file_path)
+if isinstance(storage,EnvError):
+    exit()
 
 
 for msg in PaymentMessages:
@@ -29,5 +33,7 @@ for msg in PaymentMessages:
     else:
         sleep(5)
         msg.to_payment()
-        Processing.processing(msg, storage)
+        payment = Processing.processing(msg, storage)
+        if isinstance(payment,sqlite3.Error):
+            exit()
     

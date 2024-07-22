@@ -1,9 +1,9 @@
 import os
-from params.log.logger import logger
-from error_tracking.env_error import EnvError
-from storage.memory.db import StorageInMemory
-from storage.lite.db import StorageInSQLite
 from dotenv import load_dotenv
+from log.logger import logger
+from storage.lite.db import StorageInSQLite
+from storage.memory.db import StorageInMemory
+from error_tracking.env_error import EnvError
 
 # https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
 # https://ramziv.com/article/40
@@ -38,6 +38,7 @@ class Environment():
                         EnvError.check_env_storage_file_path(ENV_STORAGE_FILE_PATH)
                     except EnvError as err:
                         logger.critical(err)
+                        return err
                     else:
                         storage = StorageInSQLite(ENV_STORAGE_FILE_PATH)
                 case "memory":
