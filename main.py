@@ -31,6 +31,7 @@ for msg in PaymentMessages:
         sleep(5)
         msg.to_payment()
         payment = Processing.processing(msg, storage)
+        print(type(payment))
         if isinstance(payment,sqlite3.Error):
             exit()
     

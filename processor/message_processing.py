@@ -36,11 +36,4 @@ class Processing:
                 if err := storage.save_payment(payment):
                     logger.error(err)
                     return err
-
-        payment = storage.get_payment_by_id(msg.uid_message)
-        if isinstance(payment, sqlite3.Error):
-            return payment
-        if payment != None:
-            if payment.uid_message != None:
-                print(vars(payment))
         return payment

@@ -47,26 +47,18 @@ def test_processor_validation_error_5():
     assert isinstance(processor(MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "1A", "123", "321", -10)), ValidationError)
 
 # 6
-def test_processor_return_value_1():
-    """it is OK, return payment"""
-    assert isinstance(processor(MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "1A", "123", "321", 50)), Payment)
-
-# 7
 def test_processor_return_value_2():
     """it is OK, return payment"""
+    processor(MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "1A", "123", "321", 50))
     assert isinstance(processor(MessagePayment(TypeMessageVariables.TYPE_MESSAGE_PROCESSED.value, "1A", "", "", "")), Payment)
 
-# 8
+# 7
 def test_processor_validation_is_updated_1():
     """it is updated early"""
     assert isinstance(processor(MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CANCELED.value, "1A", "", "", "")), ValidationError)
 
-# 9
+# 8 
 def test_processor_return_value_3():
     """it is OK, return payment"""
-    assert isinstance(processor(MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "2A", "525", "1512", 2345)), Payment)
-
-# 10 
-def test_processor_validation_is_dublicate_1():
-    """it is dublicate payment"""
-    assert isinstance(processor(MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "2A", "", "", "")), ValidationError)
+    processor(MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "2A", "525", "1512", 2345))
+    assert isinstance(processor(MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "2A", "525", "1512", 2345)), ValidationError)
