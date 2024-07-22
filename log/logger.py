@@ -1,7 +1,5 @@
 import logging
 
-# https://qna.habr.com/q/728803
-# https://realpython.com/python-logging/
 logger = logging.getLogger()
 
 file_log = logging.FileHandler('logging.log')

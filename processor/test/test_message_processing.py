@@ -5,11 +5,7 @@ from storage.memory.db import StorageInMemory
 from models.message_payment import MessagePayment
 from processor.message_processing import Processing
 from params.type_message_variables import TypeMessageVariables
-
 from error_tracking.validation_error import ValidationError
-
-# pip install pytest
-# python -m pytest
 
 STORAGE = StorageInMemory()
 

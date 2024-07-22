@@ -5,17 +5,6 @@ from storage.lite.db import StorageInSQLite
 from storage.memory.db import StorageInMemory
 from error_tracking.env_error import EnvError
 
-# https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
-# https://ramziv.com/article/40
-# py -m venv .venv
-# .venv\Scripts\activate
-# deactivate #// deactive venv
-# pip install python-dotenv
-
-# https://www.twilio.com/en-us/blog/environment-variables-python
-# https://www.google.com/search?q=python+env+variables&sca_esv=8c74246d85a060e1&ei=OT-WZrrCPKzJwPAPsLWrmAI&oq=jghtltktybt+env+python&gs_lp=Egxnd3Mtd2l6LXNlcnAiFmpnaHRsdGt0eWJ0IGVudiBweXRob24qAggAMggQABiABBiiBDIIEAAYgAQYogQyCBAAGIAEGKIEMggQABiABBiiBDIIEAAYgAQYogRIzipQiAlY_hRwAngBkAEAmAF0oAGcCaoBAzYuNrgBA8gBAPgBAZgCC6ACjAfCAgoQABiwAxjWBBhHwgINEAAYgAQYsAMYQxiKBcICChAAGIAEGLEDGA3CAgcQABiABBgNwgIIEAAYogQYiQWYAwCIBgGQBgqSBwM2LjWgB_oz&sclient=gws-wiz-serp
-# https://realpython.com/intro-to-pyenv/
-# https://www.geeksforgeeks.org/using-python-environment-variables-with-python-dotenv/
 class Environment():
 
     load_dotenv()

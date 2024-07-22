@@ -1,8 +1,6 @@
 from datetime import datetime
 from params.constants import Constants
 
-# https://sky.pro/media/raznicza-mezhdu-staticmethod-i-classmethod-v-python/#title1
-
 class Payment:
 
     def __init__(self, type_message:str, uid_message:str, 

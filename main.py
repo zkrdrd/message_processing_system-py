@@ -8,8 +8,6 @@ from processor.message_processing import Processing
 from params.type_message_variables import TypeMessageVariables
 from error_tracking.validation_error import ValidationError
 
-# https://sky.pro/media/struktura-proekta-na-python-luchshie-praktiki-dlya-novichkov/
-
 PaymentMessages = [
     MessagePayment(TypeMessageVariables.TYPE_MESSAGE_CREATED.value, "1A", "123", "321", 50),
     MessagePayment(TypeMessageVariables.TYPE_MESSAGE_PROCESSED.value, "1A", "", "", ""),
@@ -22,7 +20,6 @@ storage_type, storage_file_path = Environment().get_env_storage()
 storage = Environment().use_storage(storage_type, storage_file_path)
 if isinstance(storage,EnvError):
     exit()
-
 
 for msg in PaymentMessages:
     #msg.type_message = ""

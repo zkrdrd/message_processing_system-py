@@ -13,7 +13,6 @@ class StorageInMemory:
     def get_payment_by_id(self, id:str) -> Payment:
         """Получение данных из хранилища по id"""
         if id in self.__memory_database:
-            #print(vars(self.memory_database[id]))
             return self.__memory_database[id]
         else:
             return None
