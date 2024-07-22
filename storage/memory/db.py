@@ -1,6 +1,6 @@
 from models.payment import Payment
 
-class StorageInMemory:
+class StorageInMemory():
 
     def __init__(self) -> None:
         """Инициализация хранилища"""

@@ -4,7 +4,7 @@ from models.payment import Payment
 from models.message_payment import MessagePayment
 from error_tracking.validation_error import ValidationError
 
-class Processing:
+class Processing():
 
     @staticmethod
     def processing(msg:MessagePayment, storage) -> None:

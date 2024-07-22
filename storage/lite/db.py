@@ -3,7 +3,7 @@ from types import SimpleNamespace
 from log.logger import logger
 from models.payment import Payment
 
-class StorageInSQLite:
+class StorageInSQLite():
 
     def __init__(self, storage_file_path:str) -> None:
         """Инициализация хранилища"""
