@@ -1,7 +1,8 @@
 from datetime import datetime
-from params.constants import Constants
 
-class Payment:
+DATE_TIME = "%d-%m-%Y %H:%M:%S"
+
+class Payment():
 
     def __init__(self, type_message:str, uid_message:str, 
                  address_from:str, address_to:str, amount:int) -> None:
@@ -20,7 +21,7 @@ class Payment:
     @staticmethod
     def get_formatted_datetime() -> str:
         """Получение времени определенного формата"""
-        return datetime.now().strftime(Constants.DATE_TIME.value)
+        return datetime.now().strftime(DATE_TIME)
     
     def get_uid_message(self) -> str:
         """Получение поля uid_message"""

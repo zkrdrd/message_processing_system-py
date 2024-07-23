@@ -13,25 +13,22 @@ class Environment():
         """Чтение полей 'ENV_STORAGE_TYPE' и 'ENV_STORAGE_FILE_PATH' из environment"""
         return os.environ.get('ENV_STORAGE_TYPE'), os.environ.get('ENV_STORAGE_FILE_PATH')
 
-    def use_storage(self, ENV_STORAGE_TYPE:str, ENV_STORAGE_FILE_PATH:str) -> object:
+    def use_storage(self, env_storage_type:str, env_storage_file_path:str) -> object:
         """Проверка переменных и инициализация хранилища"""
-        try:
-            EnvError.check_env_storage_type(ENV_STORAGE_TYPE)
-        except EnvError as err:
-            logger.warning(err)
-            storage = StorageInMemory()
-        else:
-            match ENV_STORAGE_TYPE:
-                case "sqlite":
-                    try:
-                        EnvError.check_env_storage_file_path(ENV_STORAGE_FILE_PATH)
-                    except EnvError as err:
-                        logger.critical(err)
-                        return err
-                    else:
-                        storage = StorageInSQLite(ENV_STORAGE_FILE_PATH)
-                case "memory":
-                    storage = StorageInMemory()
+        match env_storage_type:
+            case "sqlite":
+                try:
+                    EnvError.check_env_storage_file_path(env_storage_file_path)
+                except EnvError as err:
+                    logger.critical(err)
+                    return err
+                else:
+                    storage = StorageInSQLite(env_storage_file_path)
+            case "memory":
+                storage = StorageInMemory()
+            case _:
+                logger.warning('storage type is not found. Using default storage in memory. For switch storage use "ENV_STORAGE_TYPE"')
+                storage = StorageInMemory()
         return storage
 
 

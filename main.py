@@ -1,6 +1,7 @@
 import sqlite3
 from time import sleep
 from log.logger import logger
+from storage.storage import Storage
 from models.message_payment import MessagePayment
 from get_env.get_enviroment import Environment
 from error_tracking.env_error import EnvError
@@ -21,6 +22,8 @@ storage = Environment().use_storage(storage_type, storage_file_path)
 if isinstance(storage,EnvError):
     exit()
 
+Storage().new_storage(storage)
+
 for msg in PaymentMessages:
     #msg.type_message = ""
     try:
@@ -30,7 +33,8 @@ for msg in PaymentMessages:
     else:
         sleep(5)
         msg.to_payment()
-        payment = Processing.processing(msg, storage)
-        if isinstance(payment,sqlite3.Error):
+        try:
+            Processing().processing(msg)
+        except sqlite3.Error:
             exit()
     

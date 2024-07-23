@@ -1,15 +1,19 @@
 import sqlite3
 from log.logger import logger
 from models.payment import Payment
+from storage.storage import Storage
 from models.message_payment import MessagePayment
 from error_tracking.validation_error import ValidationError
 
 class Processing():
 
-    @staticmethod
-    def processing(msg:MessagePayment, storage) -> None:
+    @classmethod
+    def processing(self, msg:MessagePayment) -> object:
         """Функция обработчик.\n
         Валидация, получение, сохранение, обновление данных"""
+
+        storage = Storage.get_storage()
+
         payment = storage.get_payment_by_id(msg.uid_message)
         if isinstance(payment, sqlite3.Error):
             return payment
@@ -20,7 +24,9 @@ class Processing():
                 logger.error(err)
                 return err
             else:
-                if err := storage.save_payment(msg.to_payment()):
+                try:
+                    storage.save_payment(msg.to_payment())
+                except Exception as err:
                     logger.error(err)
                     return err
         else:
@@ -33,7 +39,9 @@ class Processing():
             else: 
                 payment.type_message = msg.type_message
                 payment.updated_at = Payment.get_formatted_datetime()
-                if err := storage.save_payment(payment):
+                try:
+                    storage.save_payment(payment)
+                except Exception as err:
                     logger.error(err)
                     return err
         return payment

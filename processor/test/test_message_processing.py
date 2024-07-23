@@ -1,13 +1,17 @@
+import sqlite3
 from time import sleep
 from log.logger import logger
 from models.payment import Payment
+from storage.storage import Storage
+from storage.lite.db import StorageInSQLite
 from storage.memory.db import StorageInMemory
 from models.message_payment import MessagePayment
 from processor.message_processing import Processing
 from params.type_message_variables import TypeMessageVariables
 from error_tracking.validation_error import ValidationError
 
-STORAGE = StorageInMemory()
+#Storage().new_storage(StorageInSQLite("./storage/lite/dblite.db"))
+Storage().new_storage(StorageInMemory())
 
 def processor(PaymentMessages:MessagePayment):
     try:
@@ -16,10 +20,12 @@ def processor(PaymentMessages:MessagePayment):
         logger.error(err)
         return err
     else:
-        sleep(5)
         PaymentMessages.to_payment()
-        err = Processing.processing(PaymentMessages, STORAGE)
-    return err
+        try:
+           payment = Processing.processing(PaymentMessages)
+        except sqlite3.Error:
+            exit()
+    return payment
 
 # 1
 def test_processor_validation_error_1():

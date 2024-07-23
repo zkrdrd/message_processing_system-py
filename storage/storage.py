@@ -1,17 +1,21 @@
-from abc import ABC
-from abc import abstractmethod
 from models.payment import Payment
 
-class Storage(ABC):
+class Storage():
 
-    @abstractmethod
-    def new_storage(self):
+
+    def __init__(self) -> None:
+        self.storage = object
+
+    @classmethod
+    def new_storage(self, storage:object):
+        self.__storage = storage
+
+    @classmethod
+    def get_storage(self) -> object:
+        return self.__storage
+
+    def save_payment(payment:Payment) -> None:
         pass
 
-    @abstractmethod
-    def save_payment(self, _:Payment):
-        pass
-
-    @abstractmethod
-    def get_payment_by_id(_:str):
+    def get_payment_by_id(id:str) -> object:
         pass
