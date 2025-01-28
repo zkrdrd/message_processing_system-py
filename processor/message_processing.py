@@ -5,10 +5,11 @@ from storage.storage import Storage
 from models.message_payment import MessagePayment
 from error_tracking.validation_error import ValidationError
 
-class Processing():
+
+class Processing:
 
     @classmethod
-    def processing(self, msg:MessagePayment) -> object:
+    def processing(self, msg: MessagePayment) -> object:
         """Функция обработчик.\n
         Валидация, получение, сохранение, обновление данных"""
 
@@ -17,9 +18,11 @@ class Processing():
         payment = storage.get_payment_by_id(msg.uid_message)
         if isinstance(payment, sqlite3.Error):
             return payment
-        if payment == None:
+        if payment is None:
             try:
-                ValidationError().validate_requred_field_for_new_save_db(msg.address_to, msg.address_from, msg.amount)
+                ValidationError().validate_requred_field_for_new_save_db(
+                    msg.address_to, msg.address_from, msg.amount
+                )
             except ValidationError as err:
                 logger.error(err)
                 return err
@@ -31,12 +34,16 @@ class Processing():
                     return err
         else:
             try:
-                ValidationError().validate_field_type_message_for_update_db(payment.type_message)
-                ValidationError().check_dublicate_payment_in_storage(payment.type_message, msg.type_message)
+                ValidationError().validate_field_type_message_update_db(
+                    payment.type_message
+                )
+                ValidationError().check_dublicate_payment_in_storage(
+                    payment.type_message, msg.type_message
+                )
             except ValidationError as err:
                 logger.error(err)
                 return err
-            else: 
+            else:
                 payment.type_message = msg.type_message
                 payment.updated_at = Payment.get_formatted_datetime()
                 try:
